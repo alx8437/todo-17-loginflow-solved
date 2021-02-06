@@ -6,7 +6,7 @@ import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {useSelector} from 'react-redux'
 import {AppRootStateType} from './store'
 import {RequestStatusType} from './app-reducer'
-import {Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {Login} from "../features/Login/Login";
 import Error404 from '../components/Error404/Error404'
@@ -36,7 +36,10 @@ function App({demo = false}: PropsType) {
                 <Switch>
                     <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>} />
                     <Route path={'/login'} render={() => <Login />}/>
-                    <Route path={'*'}  render={() => <Error404 />} />
+
+
+                    <Route path={'/404'} render={() => <Error404 />} />
+                    <Redirect from={'*'} to={'/404'}/>
                 </Switch>
             </Container>
         </div>
