@@ -25,6 +25,11 @@ export const Login = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
             }
+            if (!values.password) {
+                errors.password = 'Required';
+            } else if (values.password.length < 4) {
+                errors.password = 'Must be 4 characters or more';
+            }
             return errors;
         }
     })
@@ -51,7 +56,7 @@ export const Login = () => {
                             onChange={formik.handleChange}
                             value={formik.values.email}
                         />
-                        {formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : null}
+                        {formik.errors.email && <div style={{color: "red"}}>{formik.errors.email}</div>}
                         <TextField
                             type="password"
                             label="Password"
@@ -60,6 +65,7 @@ export const Login = () => {
                             onChange={formik.handleChange}
                             value={formik.values.password}
                         />
+                        {formik.errors.password && <div style={{color: "red"}}>{formik.errors.password}</div>}
                         <FormControlLabel
                             label={'Remember me'}
                             control={
