@@ -17,6 +17,7 @@ export const Login = () => {
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
+            formik.resetForm();
         },
         validate: values => {
             const errors: FormikErrorsType = {};
@@ -52,9 +53,7 @@ export const Login = () => {
                         <TextField
                             label="Email"
                             margin="normal"
-                            name={"email"}
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
+                            {...formik.getFieldProps('email')}
                             onBlur={formik.handleBlur}
                         />
                         {formik.errors.email && formik.touched.email
@@ -67,9 +66,7 @@ export const Login = () => {
                             type="password"
                             label="Password"
                             margin="normal"
-                            name={"password"}
-                            onChange={formik.handleChange}
-                            value={formik.values.password}
+                            {...formik.getFieldProps('password')}
                             onBlur={formik.handleBlur}
                         />
                         {formik.errors.password && formik.touched.password
