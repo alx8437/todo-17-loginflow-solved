@@ -94,3 +94,22 @@ type GetTasksResponse = {
     totalCount: number
     items: TaskType[]
 }
+
+export type LoginParamsType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
+}
+
+
+export const authApi = {
+    login(payload: LoginParamsType) {
+        return instance.post<ResponseType<{userId: number}>>(`auth/login`, {...payload})
+    },
+    me() {
+        return instance.get<ResponseType>(`auth/me`);
+    },
+    logout() {
+        return instance.delete<ResponseType>(`auth/login`)
+    },
+}
